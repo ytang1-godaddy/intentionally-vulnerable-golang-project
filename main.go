@@ -38,8 +38,22 @@ func main(){
 	err := ioutil.WriteFile("config/phish-config.json", validConfig, 0644)
 	conf := config.Config{}
 	fmt.Printf("GONE PHISH'N for configs %v, maybe error: %v\n", conf, err)
-
+	
 	fmt.Printf("IS A README?? : %v as per gitea\n", markup.IsReadmeFile("README.md"))
 
+	f, err := os.Create("/tmp/dat2")
+    	check(err)
+	defer f.Close()
+	
+	n3, err := f.WriteString("writes\n")
+    	check(err)
+    	fmt.Printf("wrote %d bytes\n", n3)
+	
 	fmt.Println("HI I'M INTENTIONALLY USING VULNERABLE LIBS")
+}
+
+func check(e error) {
+    if e != nil {
+        panic(e)
+    }
 }
